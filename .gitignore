@@ -1,0 +1,7 @@
+!application.env
+development.env
+build/
+.idea/
+docker-compose.yml
+*.exe
+0
