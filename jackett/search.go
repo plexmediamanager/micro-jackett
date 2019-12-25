@@ -52,7 +52,15 @@ type SearchResponse struct {
 // Perform search by query value on specified trackers, with specified categories
 func (client *Client) Search(query string, trackers []string, categories []string) (*SearchResponse, error) {
     var result SearchResponse
-    response, err := client.sendGetRequest(&result, "indexers/all/results", query, trackers, categories)
+    newTrackers := make([]string, 0)
+    if trackers == nil {
+        for _, tracker := range client.configuredIndexers {
+            newTrackers = append(newTrackers, tracker.ID)
+        }
+    } else {
+        newTrackers = trackers
+    }
+    response, err := client.sendGetRequest(&result, "indexers/all/results", query, newTrackers, categories)
     if err != nil {
         return nil, errors.JackettUnableToPerformSearch.ToError(err)
     }
