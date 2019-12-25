@@ -1,0 +1,20 @@
+syntax = "proto3";
+package proto;
+
+service JackettService {
+    rpc GetServerConfiguration(JackettEmpty) returns (JackettResponse) {}
+    rpc GetConfiguredIndexers(JackettEmpty) returns (JackettResponse) {}
+    rpc Search(JackettSearch) returns (JackettResponse) {}
+}
+
+message JackettEmpty {}
+
+message JackettResponse {
+    bytes               result      =   1;
+}
+
+message JackettSearch {
+    string              query       =   1;
+    repeated string     trackers    =   2;
+    repeated string     categories  =   3;
+}
