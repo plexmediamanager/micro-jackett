@@ -24,7 +24,7 @@ type Client struct {
     client                  *http.Client
     serverConfiguration     *ServerConfiguration
     indexers                *Indexers
-    configuredIndexers      []*Indexer
+    configuredIndexers      []Indexer
 }
 
 // Initialize Jackett Client

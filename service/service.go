@@ -34,8 +34,8 @@ func GetServerConfiguration(client microClient.Client) (*jackett.ServerConfigura
     return result, protoToStructure(&result, response, err)
 }
 
-func GetConfiguredIndexers(client microClient.Client) ([]*jackett.Indexer, error) {
-    var result []*jackett.Indexer
+func GetConfiguredIndexers(client microClient.Client) ([]jackett.Indexer, error) {
+    var result []jackett.Indexer
     service := GetJackettService(client)
     parameters := &proto.JackettEmpty {}
     response, err := service.GetConfiguredIndexers(context.TODO(), parameters)

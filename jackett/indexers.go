@@ -33,10 +33,10 @@ func (client *Client) LoadIndexersList() error {
         return errors.JackettUnableToLoadIndexers.ToError(err)
     }
     client.indexers = response.(*Indexers)
-    configuredIndexers := make([]*Indexer, 0)
+    configuredIndexers := make([]Indexer, 0)
     for _, indexer := range result {
         if indexer.Configured {
-            configuredIndexers = append(configuredIndexers, &indexer)
+            configuredIndexers = append(configuredIndexers, indexer)
         }
     }
     client.configuredIndexers = configuredIndexers
@@ -44,6 +44,6 @@ func (client *Client) LoadIndexersList() error {
 }
 
 // Get list of configured Jackett indexers
-func (client *Client) GetConfiguredIndexers() []*Indexer {
+func (client *Client) GetConfiguredIndexers() []Indexer {
     return client.configuredIndexers
 }
